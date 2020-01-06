@@ -82,10 +82,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'CONN_MAX_AGE': 0,
         'OPTIONS': {
-            'timeout': 30,
+            'timeout': 60,
         }
-
-
     },
 
 }
