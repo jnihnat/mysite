@@ -7,13 +7,16 @@
 {% for question in object_list %}
     <h3>{{ question.question_text }}</h3>
     {% if question.question_type == 'Text' %}
-        <input type="text" name={{ question.id }} id=="choice{{ forloop.counter }}" >
+        <input type="text" name={{ question.id }} id=="choice{{ forloop.counter }}" required>
         <label for="choice{{ forloop.counter }}">zadajte text</label><br>
     {% elif question.question_type == 'Choice' %}
         {% for choice in question.choice_set.all %}
             <input type="radio" name={{ question.id }} id="choice{{ forloop.counter }}" value="{{ choice.id }}" >
             <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
+    {% elif question.question_type == 'Int' %}
+            <input type="number" name={{ question.id }} id="choice{{ forloop.counter }}" step="1" required>
+            <label for="choice{{ forloop.counter }}">zadajte cele cislo</label><br>
     {% endif %}
 {% endfor %}
 <br>

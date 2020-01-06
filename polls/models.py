@@ -6,6 +6,7 @@ import datetime
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
+    Order = models.IntegerField()
 
     class Que_type(models.TextChoices):
         Choice = 'Choice', 'Choice'
@@ -26,9 +27,11 @@ class Question(models.Model):
     def extra_fields_by_type(self):
         extra_inline_model=''
         if self.question_type == 'Choice':
-            extra_inline_model= 'ChoiceInline'
+            extra_inline_model = 'ChoiceInline'
         elif self.question_type == 'Text':
-            extra_inline_model='TextInline'
+            extra_inline_model = 'TextInline'
+        elif self.question_type == 'Int':
+            extra_inline_model = 'IntInline'
         return extra_inline_model
 
 
@@ -42,12 +45,19 @@ class Choice(models.Model):
 
 
 class Texts(models.Model):
-    question=models.ForeignKey(Question, on_delete=models.CASCADE)
-    text_text=models.CharField(max_length=200)
-    votes=models.IntegerField(default=0)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.text_text
+        return self.text
+
+
+class Integer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    integer = models.IntegerField()
+    votes = models.IntegerField(default=0)
+
 
 
 

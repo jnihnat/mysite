@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question, Choice, Texts
+from .models import Question, Choice, Texts, Integer
 
 
 class ChoiceInline(admin.TabularInline):
@@ -12,15 +12,19 @@ class TextInline(admin.TabularInline):
     extra = 0
 
 
+class IntInline(admin.TabularInline):
+    model = Integer
+    extra = 0
+
+
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['question_text']}),
-        (None, {'fields': ['question_type']}),
+        (None, {'fields': ['question_text', 'Order', 'question_type']}),
         ('Date Information', {'fields': ['pub_date']}),
 
     ]
-    inlines = [ChoiceInline, TextInline]
-    list_display = ('question_text', 'pub_date', 'was_published_recently')
+    inlines = [ChoiceInline, TextInline, IntInline]
+    list_display = ('question_text', 'pub_date', 'was_published_recently','Order')
     list_filter = ['pub_date']
     search_fields = ['question_text']
     readonly_fields = ['question_type']

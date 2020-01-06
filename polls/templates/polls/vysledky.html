@@ -5,5 +5,11 @@
 {% for choice in question.choice_set.all|dictsortreversed:"votes" %}
     <li>{{ choice.choice_text }}: {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
+{% for text in question.texts_set.all|dictsortreversed:"votes" %}
+    <li>{{ text.text }}: {{ text.votes }} vote{{ text.votes|pluralize }}</li>
+{% endfor %}
+{% for integer in question.integer_set.all|dictsortreversed:"votes" %}
+    <li>{{ integer.integer }}: {{ integer.votes }} vote{{ integer.votes|pluralize }}</li>
+{% endfor %}
 {% endfor %}
 <br>
