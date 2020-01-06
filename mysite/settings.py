@@ -25,7 +25,11 @@ SECRET_KEY = '_7(c81i1ieam7!#+(uqni3=j7h_3sds$xib^eeewan)p88&t3&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
+=======
+ALLOWED_HOSTS = ['*']
+>>>>>>> Initial commit
 
 
 # Application definition
