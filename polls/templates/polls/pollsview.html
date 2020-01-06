@@ -1,0 +1,21 @@
+<h1>Dotaznik</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:hlasovanie' %}" method="post">
+{% csrf_token %}
+{% for question in object_list %}
+    <h3>{{ question.question_text }}</h3>
+    {% if question.question_type == 'Text' %}
+        <input type="text" name={{ question.id }} id=="choice{{ forloop.counter }}" >
+        <label for="choice{{ forloop.counter }}">zadajte text</label><br>
+    {% elif question.question_type == 'Choice' %}
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name={{ question.id }} id="choice{{ forloop.counter }}" value="{{ choice.id }}" >
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+<br>
+<input type="submit" value="Vote">
+</form>
