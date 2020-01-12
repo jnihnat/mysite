@@ -2,7 +2,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'polls:hlasovanie' %}" method="post">
+<form action="{% url 'polls:answer' %}" method="post">
 {% csrf_token %}
 {% for question in object_list %}
     <h3>{{ question.question_text }}</h3>
