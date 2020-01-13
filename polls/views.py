@@ -71,20 +71,23 @@ class ResultsView(generic.DetailView):
 
 
 # Index page of entire site
-def PrvaStranka(request):
+def first_site(request):
     return render(request, "polls/prvastranka.html")
 
 
+# Function for detail view of question - obsolete
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/detail.html", {"question": question})
 
 
+# Result view function of polls per question in Polls app - obsolete
 def result(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/results.html", {"question": question})
 
 
+# function after submiting answer for question - obsolete
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -101,7 +104,8 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("polls:result", args=(question_id,)))
 
 
-def Answers(request):
+# Function after submiting answer for Form
+def answers(request):
     asked_questions = (
         Question.objects.exclude(choice__isnull=True)
         .filter(pub_date__lte=timezone.now())
@@ -116,7 +120,8 @@ def Answers(request):
     ids = list(asked_questions.values_list("id", flat=True))
     ids = list(map(str, ids))
     answered_questions = list(request.POST.keys())[1:]
-    #    unanswered_questions = set(ids).symmetric_difference(set(answered_questions))
+    #    unanswered_questions = set(ids).symmetric_difference(set(answered_questions)) # not used
+    # If we got answers for all questions and then save them
     if ids == answered_questions:
         for question in asked_questions:
             if question.question_type == "Choice":
@@ -155,10 +160,12 @@ def Answers(request):
     return HttpResponseRedirect(reverse("polls:thanks"))
 
 
-def Thanks(request):
+# Function for displaying Thank you after form submit
+def thanks(request):
     return render(request, "polls/koniec.html")
 
 
+# Class for Form resutls
 class Results(generic.ListView):
     model = Question
     template_name = "polls/vysledky.html"

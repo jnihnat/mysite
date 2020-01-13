@@ -8,7 +8,7 @@ urlpatterns = [
     path("Question_detail/<int:pk>/", views.DetailView.as_view(), name="detail"),
     path("results/<int:pk>/", views.ResultsView.as_view(), name="result"),
     path("Dotaznik/", views.PollsView.as_view(), name="dotaznik"),
-    path("Dotaznik/hlasovanie/", views.Answers, name="answer"),
-    path("Dotaznik/koniec/", views.Thanks, name="thanks"),
-    path("Dotaznik/vysledky", views.Results.as_view(), name="vysledky"),
+    path("Dotaznik/hlasovanie/", views.answers, name="answer"),
+    path("Dotaznik/koniec/", views.thanks, name="thanks"),
+    path("Dotaznik/vysledky", views.Results.as_view(), name="form_results"),
 ]

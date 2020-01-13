@@ -8,13 +8,13 @@ class Question(models.Model):
     pub_date = models.DateTimeField("date published")
     Order = models.IntegerField()
 
-    class Que_type(models.TextChoices):
+    class QueType(models.TextChoices):
         Choice = "Choice", "Choice"
         Text = "Text", "Text Field"
         Integer = "Int", "Integer Field"
 
     question_type = models.CharField(
-        max_length=200, choices=Que_type.choices, default=Que_type.Choice
+        max_length=200, choices=QueType.choices, default=QueType.Choice
     )
 
     def __str__(self):

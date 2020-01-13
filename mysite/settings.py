@@ -11,17 +11,17 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import logging.config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR2="/home/site/"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-# SECRET_KEY="_7(c81i1ieam7!#+(uqni3=j7h_3sds$xib^eeewan)p88&t3&"
+# SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY="_7(c81i1ieam7!#+(uqni3=j7h_3sds$xib^eeewan)p88&t3&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', False)
@@ -119,6 +119,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL="/static/"
+# STATIC_ROOT = "/venv/Lib/site-packages/django/contrib/admin/static/"
+
+STATICFILES_DIRS = [
+    '/venv/Lib/site-packages/django/contrib/admin',
+]
+
 # Logging Configuration
 
 # Clear prev config
