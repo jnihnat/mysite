@@ -20,13 +20,13 @@ BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-# SECRET_KEY="_7(c81i1ieam7!#+(uqni3=j7h_3sds$xib^eeewan)p88&t3&"
+# SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY="_7(c81i1ieam7!#+(uqni3=j7h_3sds$xib^eeewan)p88&t3&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', False)
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
 
@@ -118,12 +118,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/app/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
      os.path.join(BASE_DIR, 'venv/Lib/site-packages/django/contrib/admin/static/'),
  )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Logging Configuration
 
