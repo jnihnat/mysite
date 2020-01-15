@@ -1,0 +1,41 @@
+version: '3'
+volumes:
+  pgdata:
+  staticfiles:
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Prod/WEB
+    volumes:
+      - .:/app
+      - staticfiles:/staticfiles
+    ports:
+    - "8000:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate
+                && python manage.py collectstatic --noinput --clear
+                &&  python manage.py createsuperuserwithpassword --username admin --password admin
+                --email admin@example.org --preserve
+                && gunicorn -w 3 mysite.wsgi -b 0.0.0.0:8000"
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/Prod/DB
+    restart: unless-stopped
+    expose:
+      - "5432"
+    environment:   # will be used by the init script
+      LC_ALL: C.UTF-8
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassowrd
+      POSTGRES_DB: mydb
+    volumes:
+    - pgdata:/posgre
+  ngingx:
+    build:
+      context: .
+      dockerfile: docker/Prod/NGINGX
+    volumes:
+      - staticfiles:/staticfiles
+    ports:
+    - 80:80

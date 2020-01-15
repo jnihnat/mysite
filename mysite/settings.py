@@ -26,7 +26,7 @@ SECRET_KEY="_7(c81i1ieam7!#+(uqni3=j7h_3sds$xib^eeewan)p88&t3&"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', False)
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '192.168.99.100').split(',')
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS=[
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "polls.apps.PollsConfig",
+    "django_createsuperuserwithpassword",
 ]
 
 MIDDLEWARE=[
@@ -68,25 +69,25 @@ TEMPLATES=[
     },
 ]
 
-WSGI_APPLICATION="mysite.wsgi.application"
+WSGI_APPLICATION = "mysite.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES={
     "default": {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         # 'CONN_MAX_AGE': 5,
         # 'OPTIONS': {
         # 'timeout': 60,
         # }
-        # "ENGINE": "django.db.backends.mysql",
-        # "NAME": "mysitedb",
-        # "USER": "mysiteuser",
-        # "PASSWORD": "password",
-        # "HOST": "13.80.146.15",
-        # "PORT": "3306",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "mydb",
+        "USER": "myuser",
+        "PASSWORD": "mypassowrd",
+        "HOST": "postgres",
+        "PORT": "5432",
     },
 }
 
@@ -119,12 +120,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-     os.path.join(BASE_DIR, 'venv/Lib/site-packages/django/contrib/admin/static/'),
- )
+# STATICFILES_DIRS = (
+#      os.path.join(BASE_DIR, 'venv/Lib/site-packages/django/contrib/admin/static/'),
+# )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/static/'
+"""
 # Logging Configuration
 
 # Clear prev config
@@ -154,3 +156,4 @@ logging.config.dictConfig({
         },
     },
 })
+"""

@@ -1,2 +1,4 @@
-django==3.0
+django==3.0.2
 gunicorn
+psycopg2
+django-createsuperuserwithpassword
