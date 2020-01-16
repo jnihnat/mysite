@@ -11,4 +11,4 @@ RUN apt-get update \
 
 COPY . /app/
 
-EXPOSE 80
+EXPOSE 8000

@@ -6,11 +6,9 @@ services:
   web:
     build:
       context: .
-      dockerfile: docker/Prod/WEB
-    environment:
-      - DJANGO_SETTINGS_MODULE=mysite.settings.prod
+      dockerfile: docker/Dev/WEB
     env_file:
-      - docker/Prod/ENV
+      - docker/Dev/ENV
     volumes:
       - .:/app
       - staticfiles:/staticfiles
@@ -24,12 +22,12 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: docker/Prod/DB
+      dockerfile: docker/Dev/DB
     restart: unless-stopped
     expose:
       - "5432"
     env_file:
-      - docker/Prod/ENV
+      - docker/Dev/ENV
     environment:   # will be used by the init script
       LC_ALL: C.UTF-8
     volumes:
@@ -37,7 +35,7 @@ services:
   ngingx:
     build:
       context: .
-      dockerfile: docker/Prod/NGINGX
+      dockerfile: docker/Dev/NGINGX
     volumes:
       - staticfiles:/staticfiles
     ports:
